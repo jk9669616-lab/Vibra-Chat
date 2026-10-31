@@ -1,53 +1,65 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VibrChat</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #eaf2f5;
-      text-align: center;
-    }
-    header {
-      background: #075e54;
-      color: white;
-      padding: 25px;
-      font-size: 28px;
-      font-weight: bold;
-    }
-    main {
-      padding: 40px 20px;
-    }
-    input {
-      padding: 14px;
-      width: 80%;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    button {
-      background: #075e54;
-      color: white;
-      border: none;
-      padding: 14px 25px;
-      border-radius: 8px;
-      margin-top: 15px;
-      font-size: 16px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VibraChat</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#eaf1f3;color:#222}
+header{background:#075e54;color:white;text-align:center;padding:22px}
+main{max-width:460px;margin:25px auto;padding:15px}
+.panel{background:white;padding:22px;border-radius:14px;box-shadow:0 2px 10px #0001}
+input{width:100%;padding:14px;margin:10px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
+button{width:100%;padding:14px;margin:6px 0;background:#075e54;color:white;border:0;border-radius:8px;font-size:16px}
+#chat{display:none}
+#messages{height:280px;overflow:auto;background:#f3f5f5;padding:10px;border-radius:8px}
+.message{background:#dcf8c6;padding:10px;margin:8px;border-radius:10px;overflow-wrap:anywhere}
+</style>
 </head>
 <body>
-  <header>VibrChat</header>
-  <main>
-    <h2>Welcome to VibrChat!</h2>
-    <p>آپ کی اپنی چیٹ ایپ</p>
-    <input type="text" placeholder="اپنا نام لکھیں">
-    <br>
-    <button>شروع کریں</button>
-  </main>
+<header>
+<h1>VibraChat</h1>
+<p>Connect with friends</p>
+</header>
+<main>
+<div class="panel" id="welcome">
+<h2>Welcome to VibraChat</h2>
+<p>Enter your name to get started</p>
+<input id="username" placeholder="Your name">
+<button onclick="startChat()">Start Chat</button>
+</div>
+<div class="panel" id="chat">
+<h2 id="hello"></h2>
+<div id="messages"></div>
+<input id="messageInput" placeholder="Write a message">
+<button onclick="sendMessage()">Send</button>
+<button onclick="logout()">Log out</button>
+</div>
+</main>
+<script>
+function startChat(){
+let name=document.getElementById('username').value.trim();
+if(!name){alert('Please enter your name');return;}
+document.getElementById('hello').textContent='Welcome '+name;
+document.getElementById('welcome').style.display='none';
+document.getElementById('chat').style.display='block';
+}
+function sendMessage(){
+let input=document.getElementById('messageInput');
+let value=input.value.trim();
+if(!value)return;
+let msg=document.createElement('div');
+msg.className='message';
+msg.textContent=value;
+document.getElementById('messages').appendChild(msg);
+input.value='';
+}
+function logout(){
+document.getElementById('chat').style.display='none';
+document.getElementById('welcome').style.display='block';
+document.getElementById('messages').innerHTML='';
+}
+</script>
 </body>
 </html>
-VibraChat initial web chat app setup. Added the main index.html file and created the first version of the project.
